@@ -14,7 +14,7 @@
     "ingress": true,
     "ingress_port": 7070,
     "init": false,
-    "image": "evcc/evcc",
+    "image": "evcc/evcc:lm-new",
     "options": {
         "config_file": "/config/evcc.yaml",
         "sqlite_file": "/data/evcc.db"
