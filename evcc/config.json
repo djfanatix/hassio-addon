@@ -1,6 +1,6 @@
 {
     "name": "evcc",
-    "version": "lm-new",
+    "version": "0.129.0",
     "slug": "evcc",
     "description": "EV Charge Controller!",
     "url": "https://github.com/evcc-io/evcc",
@@ -28,17 +28,23 @@
     "uart": true,
     "webui": "http://[HOST]:[PORT:7070]/",
     "ports": {
+        "4712/tcp": 4712,
         "5200/tcp": 5200,
+        "5201/tcp": 5201,
         "5353/udp": 5353,
         "7090/udp": 7090,
         "8887/tcp": 8887,
+        "8899/udp": 8899,
         "9522/udp": 9522
     },
     "ports_description": {
+        "4712/tcp": "EEBUS",
         "5200/tcp": "Modbus Proxy",
+        "5201/tcp": "Modbus Proxy (multi port)",
         "5353/udp": "Multicast DNS (mDNS)",
         "7090/udp": "Keba",
         "8887/tcp": "OCPP web socket",
+        "8899/udp": "Modbus UDP",
         "9522/udp": "SMA Speedwire Multicast"
     }
 }
