@@ -1,7 +1,7 @@
 {
-    "name": "evcc",
+    "name": "af-evcc",
     "version": "0.129.0",
-    "slug": "evcc",
+    "slug": "af-evcc",
     "description": "EV Charge Controller!",
     "url": "https://github.com/evcc-io/evcc",
     "arch": ["armhf", "armv7", "aarch64", "amd64", "i386"],
