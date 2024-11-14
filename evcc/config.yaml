@@ -2,7 +2,7 @@
 name: evcc
 version: 0.131.6
 slug: djfanatix-evcc
-description: EV Charge Controller!
+description: EVCC Djfanatix
 url: https://github.com/djfanatix/evcc
 arch: 
   - armhf
