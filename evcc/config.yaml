@@ -1,6 +1,6 @@
 ---
 name: evcc
-version: 0.131.5
+version: latest
 slug: djfanatix-evcc
 description: EVCC Djfanatix
 url: https://github.com/djfanatix/evcc
