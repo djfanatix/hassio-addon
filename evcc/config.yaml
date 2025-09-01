@@ -21,8 +21,8 @@ ingress_port: 7070
 init: false
 image: djfanatix/evcc
 options: 
-  config_file: /config/evcctest.yaml
-  sqlite_file: /data/evcctest.db
+  config_file: /config/evcctest1.yaml
+  sqlite_file: /data/evcctest1.db
 schema:
   config_file: str
   sqlite_file: str
