@@ -104,6 +104,10 @@ Proceed with installation process of the evcc Integration for Home Assistant as 
 
 The upgrade to the latest version of evcc, is included in the Home Assistant update process.
 
+## Optimizer branch
+
+This add-on builds evcc locally from the `feat/optimizer-automatic` branch during the Home Assistant add-on build. It does not pull or require a `djfanatix/evcc` image from Docker Hub. Rebuild the add-on after refreshing the repository to fetch the latest commit from that branch.
+
 ## Messages and Notifications
 
 Evcc is able to send you cloudless messages and notification via the [Home Assistant app](https://companion.home-assistant.io/download/).
