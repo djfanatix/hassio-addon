@@ -2,9 +2,10 @@
 FROM --platform=$BUILDPLATFORM alpine:3.23 AS source
 
 ARG EVCC_REF=test/optimizer
+ARG EVCC_REPO=https://github.com/djfanatix/evcc.git
 
 RUN apk add --no-cache git \
-    && git clone --depth 1 --branch "${EVCC_REF}" https://github.com/evcc-io/evcc.git /src
+    && git clone --depth 1 --branch "${EVCC_REF}" "${EVCC_REPO}" /src
 
 # Build the frontend with the toolchain used by the selected evcc branch.
 FROM --platform=$BUILDPLATFORM ghcr.io/voidzero-dev/vite-plus:0.2.6 AS frontend
