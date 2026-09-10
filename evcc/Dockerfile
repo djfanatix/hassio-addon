@@ -4,6 +4,10 @@ FROM --platform=$BUILDPLATFORM alpine:3.23 AS source
 ARG EVCC_REF=test/optimizer
 ARG EVCC_REPO=https://github.com/djfanatix/evcc.git
 
+# Bust the build cache whenever EVCC_REF moves: this response body changes with
+# every new commit, so the clone below is re-run instead of served from cache.
+ADD https://api.github.com/repos/djfanatix/evcc/commits/${EVCC_REF} /tmp/evcc-head.json
+
 RUN apk add --no-cache git \
     && git clone --depth 1 --branch "${EVCC_REF}" "${EVCC_REPO}" /src
 
