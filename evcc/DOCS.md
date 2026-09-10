@@ -104,9 +104,9 @@ Proceed with installation process of the evcc Integration for Home Assistant as 
 
 The upgrade to the latest version of evcc, is included in the Home Assistant update process.
 
-## Optimizer branch
+## Optimizer test branch
 
-This add-on builds evcc locally from the `feat/optimizer-automatic` branch during the Home Assistant add-on build. It does not pull or require a `djfanatix/evcc` image from Docker Hub. Rebuild the add-on after refreshing the repository to fetch the latest commit from that branch.
+This add-on builds evcc locally from the `test/optimizer` branch during the Home Assistant add-on build. It does not pull or require a `djfanatix/evcc` image from Docker Hub. Rebuild the add-on after refreshing the repository to fetch the latest commit from that branch.
 
 ## Messages and Notifications
 

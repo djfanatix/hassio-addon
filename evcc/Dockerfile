@@ -1,7 +1,7 @@
 # Fetch the requested evcc branch as part of the Home Assistant add-on build.
 FROM alpine:3.23 AS source
 
-ARG EVCC_REF=feat/optimizer-automatic
+ARG EVCC_REF=test/optimizer
 
 RUN apk add --no-cache git \
     && git clone --depth 1 --branch "${EVCC_REF}" https://github.com/evcc-io/evcc.git /src
