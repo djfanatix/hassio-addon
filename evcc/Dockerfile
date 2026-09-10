@@ -1,5 +1,5 @@
 # Fetch the requested evcc branch as part of the Home Assistant add-on build.
-FROM alpine:3.23 AS source
+FROM --platform=$BUILDPLATFORM alpine:3.23 AS source
 
 ARG EVCC_REF=test/optimizer
 
@@ -11,10 +11,15 @@ FROM --platform=$BUILDPLATFORM ghcr.io/voidzero-dev/vite-plus:0.2.6 AS frontend
 
 USER root
 WORKDIR /build
-COPY --from=source /src/ ./
+COPY --from=source /src/.node-version /src/package*.json ./
+RUN npm ci
 
-RUN npm ci \
-    && make ui
+COPY --from=source /src/Makefile ./
+COPY --from=source /src/*.js /src/*.ts /src/*.mts ./
+COPY --from=source /src/.browserslistrc ./
+COPY --from=source /src/assets ./assets
+COPY --from=source /src/i18n ./i18n
+RUN make ui
 
 # Build the evcc executable for the target Home Assistant architecture.
 FROM --platform=$BUILDPLATFORM golang:1.27.0-alpine AS builder
@@ -25,6 +30,7 @@ RUN apk add --no-cache git make patch tzdata ca-certificates \
 ARG TARGETOS
 ARG TARGETARCH
 ARG TARGETVARIANT
+ARG GOARM=${TARGETVARIANT#v}
 ARG RELEASE=0
 
 WORKDIR /build
@@ -38,7 +44,7 @@ RUN make patch-asn1
 RUN make assets
 COPY --from=frontend /build/dist ./dist
 
-RUN CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} GOARM=${TARGETVARIANT#v} \
+RUN CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} GOARM=${GOARM} \
     RELEASE=${RELEASE} make build
 
 # Keep the runtime image small while retaining the upstream add-on entrypoint.
