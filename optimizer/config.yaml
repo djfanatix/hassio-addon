@@ -1,6 +1,6 @@
 ---
 name: optimizer
-version: 1.0.0
+version: 1.0.1
 slug: djfanatix-optimizer
 description: EV/battery charging optimizer (djfanatix fork, self-consumption goal)
 url: https://github.com/djfanatix/optimizer
@@ -13,6 +13,7 @@ panel_admin: false
 boot: auto
 stage: experimental
 init: false
+host_network: true
 watchdog: http://[HOST]:[PORT:7050]/optimize/health
 ports:
   7050/tcp: 7050
