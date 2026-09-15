@@ -1,6 +1,6 @@
 ---
 name: evcc
-version: 1.0.31
+version: 1.0.32
 slug: djfanatix-evcc
 description: EVCC Djfanatix
 url: https://github.com/djfanatix/evcc
@@ -25,6 +25,7 @@ options:
 schema:
   config_file: str
   sqlite_file: str
+  OPTIMIZER_URI: url?
 host_network: true
 map: 
   - type: addon_config
