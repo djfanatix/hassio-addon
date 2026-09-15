@@ -1,7 +1,7 @@
 # Fetch the requested optimizer branch as part of the Home Assistant add-on build.
 FROM --platform=$BUILDPLATFORM alpine:3.23 AS source
 
-ARG OPTIMIZER_REF=feat/self-consumption-goal
+ARG OPTIMIZER_REF=test-build
 ARG OPTIMIZER_REPO=https://github.com/djfanatix/optimizer.git
 
 # Bust the build cache whenever OPTIMIZER_REF moves: this response body changes with
