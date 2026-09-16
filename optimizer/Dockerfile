@@ -53,7 +53,11 @@ ENV PYTHONUNBUFFERED=1
 ENV OPTIMIZER_TIME_LIMIT=30
 ENV OPTIMIZER_NUM_THREADS=2
 # the access log is the only source of per request latency, keep the format lean.
-ENV GUNICORN_CMD_ARGS="--workers 4 --max-requests 32 --config python:optimizer.gunicorn_conf --access-logfile - --access-logformat '%(m)s %(U)s %(s)s %(D)s'"
+# --timeout must stay well above OPTIMIZER_TIME_LIMIT: gunicorn SIGKILLs a worker that
+# exceeds it, and the solve() call alone can take the full OPTIMIZER_TIME_LIMIT before
+# response building/serialization even starts. Gunicorn's own default is 30s, which
+# collided with OPTIMIZER_TIME_LIMIT=30 and killed every request.
+ENV GUNICORN_CMD_ARGS="--workers 4 --max-requests 32 --timeout 90 --config python:optimizer.gunicorn_conf --access-logfile - --access-logformat '%(m)s %(U)s %(s)s %(D)s'"
 
 EXPOSE 7050/tcp
 
