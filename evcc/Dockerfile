@@ -1,7 +1,7 @@
 # Fetch the requested evcc branch as part of the Home Assistant add-on build.
 FROM --platform=$BUILDPLATFORM alpine:3.23 AS source
 
-ARG EVCC_REF=test/optimizer-automatic
+ARG EVCC_REF=test/optimizer
 ARG EVCC_REPO=https://github.com/djfanatix/evcc.git
 
 # Bust the build cache whenever EVCC_REF moves: this response body changes with
