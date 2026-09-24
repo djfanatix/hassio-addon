@@ -1,6 +1,6 @@
 ---
 name: optimizer
-version: 1.0.6
+version: 1.0.7
 slug: djfanatix-optimizer
 description: EV/battery charging optimizer (djfanatix fork, per-battery efficiency)
 url: https://github.com/djfanatix/optimizer
