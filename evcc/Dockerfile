@@ -29,7 +29,7 @@ RUN make ui
 # Build the evcc executable for the target Home Assistant architecture.
 FROM --platform=$BUILDPLATFORM golang:1.27.0-alpine AS builder
 
-RUN apk add --no-cache git make patch tzdata ca-certificates \
+RUN apk add --no-cache git make patch tzdata ca-certificates curl \
     && update-ca-certificates
 
 ARG TARGETOS
@@ -49,8 +49,13 @@ RUN make patch-asn1
 RUN make assets
 COPY --from=frontend /build/dist ./dist
 
-RUN CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} GOARM=${GOARM} \
-    RELEASE=${RELEASE} make build
+# Our fork clone has neither upstream's release tags nor the history for `git
+# describe` to find one, so the Makefile's own version logic falls back to the
+# bare commit SHA. Report the latest published evcc release instead: the
+# Home Assistant evcc integration's version check rejects a SHA.
+RUN EVCC_TAG="$(curl -fsSL https://api.github.com/repos/evcc-io/evcc/releases/latest | grep -o '"tag_name": *"[^"]*"' | head -1 | cut -d'"' -f4)" \
+    && CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${TARGETARCH} GOARM=${GOARM} \
+       RELEASE=${RELEASE} TAG_NAME="${EVCC_TAG}" make build
 
 # Keep the runtime image small while retaining the upstream add-on entrypoint.
 FROM alpine:3.23
